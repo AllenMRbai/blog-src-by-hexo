@@ -9,7 +9,7 @@ description: 记录学习的过程
 keywords: blog
 author: Allen Bai
 language: zh-Hans
-timezone: CN
+timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
