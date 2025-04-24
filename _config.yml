@@ -48,10 +48,5 @@ deploy:
   repo: 'git@github.com:AllenMRbai/AllenMRbai.github.io.git'
   branch: 'main'
   repository: 'git@github.com:AllenMRbai/blog-src-by-hexo.git'
-  user_email: '957820957@qq.com'
-  user_name: 'AllenMRbai'
   email: '957820957@qq.com'
   name: 'AllenMRbai'
-  user:
-    email: '957820957@qq.com'
-    name: 'AllenMRbai'
