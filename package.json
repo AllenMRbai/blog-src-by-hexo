@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "server": "hexo server",
-    "deploy": "hexo g && hexo d"
+    "build": "hexo g && hexo d"
   },
   "hexo": {
-    "version": "3.9.0"
+    "version": "3.8.0"
+  },
+  "engines": {
+    "node": ">= 22.0.0"
   },
   "dependencies": {
     "hexo": "^3.8.0",
