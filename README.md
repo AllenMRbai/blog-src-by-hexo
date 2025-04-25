@@ -7,3 +7,5 @@ hexo 命令[链接](https://hexo.io/docs/commands)
 ```shell
 hexo new [layout] <title>
 ```
+
+添加完文档，直接push到github自动构建部署
