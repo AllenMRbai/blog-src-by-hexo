@@ -31,3 +31,44 @@ Next.js 还提供其他功能，如自动代码拆分、静态站点生成和动
 ### 怎么判断是否服务端组件（RSC）?
 
 在next.js内，默认所有组件为服务端组件，服务端组件只会在服务端执行，不会在客户端执行。如果要在组件内使用可交互的hooks，需要在组件上添加`use client`，否则会报错。如果你希望组件可以在客户端和服务端都使用，可以使用`use client`。
+
+### 什么是服务端函数？
+
+在服务端组件内部的函数体声明'use server'，标识该函数在服务端执行。可通过props的形式传递给客户端组件，客户端组件调用该函数，会触发服务端函数执行，并将结果返回给前端。
+
+```typescript
+// Server Component
+import Button from './Button';
+
+function EmptyNote () {
+  async function createNoteAction() {
+    // Server Function
+    'use server';
+    
+    await db.notes.create();
+  }
+
+  return <Button onClick={createNoteAction}/>;
+}
+```
+
+服务端函数另一种用法，单独在文件内声明，然后客户端组件使用`import`方法导入使用。
+
+```typescript
+"use server";
+
+export async function createNote() {
+  await db.notes.create();
+}
+```
+
+```tsx
+"use client";
+import {createNote} from './actions';
+
+function EmptyNote() {
+  console.log(createNote);
+  // {$$typeof: Symbol.for("react.server.reference"), $$id: 'createNote'}
+  <button onClick={() => createNote()} />
+}
+```
