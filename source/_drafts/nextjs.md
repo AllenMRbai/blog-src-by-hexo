@@ -30,22 +30,48 @@ Next.js 还提供其他功能，如自动代码拆分、静态站点生成和动
 
 ### 怎么判断是否服务端组件（RSC）?
 
-在next.js内，默认所有组件为服务端组件，服务端组件只会在服务端执行，不会在客户端执行。如果要在组件内使用可交互的hooks，需要在组件上添加`use client`，否则会报错。如果你希望组件可以在客户端和服务端都使用，可以使用`use client`。
+在next.js内，没有特殊声明的情况下默认组件为服务端组件。服务端组件只会在服务端执行，不会在客户端执行。服务端组件内可以直接发起sql查询数据，或者使用orm、graphQL查询数据库。
 
-### 什么是服务端函数？
+如果组件内使用了可交互的hooks（use和useId可在服务端组件使用）和事件绑定，需要在组件代码最顶部添加`use client`，否则会报错。`use client`标识该组件为客户端组件，该组件在服务端渲染和客户端渲染都会执行。
 
-在服务端组件内部的函数体声明'use server'，标识该函数在服务端执行。可通过props的形式传递给客户端组件，客户端组件调用该函数，会触发服务端函数执行，并将结果返回给前端。
+### 服务端组件的优缺点
+
+优点：
+1. 可将部分渲染逻辑迁移到服务端，减轻客户端渲染压力。
+2. 可以直接对数据库等中间件进行操作，同时也能对服务端的文件系统进行操作。
+
+缺点：
+1. 没法绑定交互事件，例如`onClick`事件
+2. 无法使用hooks（use和useId除外）
+
+### 没有`use client`标识的组件，一定就是服务端组件吗？
+
+不一定。假设有个`FancyText`组件，它没有`use client`标记。但它同时被服务端组件和客户端组件`import`并使用，那么它在服务端组件下属于服务端组件，在客户端组件下属于客户端组件。详细例子见[文档](https://react.dev/reference/rsc/use-client#how-use-client-marks-client-code)
+
+模块依赖树（ module dependency tree）下，客户端组件内`import`的所有子组件和模块，都会被标记为客户端模块（client modules）。
+
+### 客户端组件内可以引入并使用服务端组件吗？
+
+客户端组件不能直接`import`服务端组件使用。但服务端组件可以作为props（例如 children）传递到客户端组件内进行使用。如果客户端组件发生更新，通过props传进来的服务端组件并不会触发更新。
+
+### 服务端组件传递数据给客户端子组件需要注意什么？
+
+服务端组件通过props传递给客户端组件的数据，必须是可序列化的。具体可以参考[文档](https://react.dev/reference/rsc/use-client#serializable-types)。
+
+### 什么是服务端函数（server function）？
+
+在服务端组件内部的函数体声明'use server'（注意，函数必须为async函数），标识该函数在服务端执行。服务端函数可通过props的形式传递给客户端组件，客户端组件调用该函数，会触发服务端函数执行，并将结果返回给前端。注意函数的入参和出参都是可序列化的。
 
 ```typescript
 // Server Component
 import Button from './Button';
 
 function EmptyNote () {
-  async function createNoteAction() {
+  async function createNoteAction(...someParams: any[]) {
     // Server Function
     'use server';
     
-    await db.notes.create();
+    await db.notes.create(...someParams);
   }
 
   return <Button onClick={createNoteAction}/>;
@@ -72,3 +98,4 @@ function EmptyNote() {
   <button onClick={() => createNote()} />
 }
 ```
+
