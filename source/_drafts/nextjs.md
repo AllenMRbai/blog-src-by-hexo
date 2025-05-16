@@ -26,7 +26,7 @@ React和 Next.js 之间的主要区别在于它们处理路由的方式。 React
 
 Next.js 还提供其他功能，如自动代码拆分、静态站点生成和动态导入。
 
-## 常见问题
+## 服务端组件与客户端组件问题
 
 ### 怎么判断是否服务端组件（RSC）?
 
@@ -57,6 +57,8 @@ Next.js 还提供其他功能，如自动代码拆分、静态站点生成和动
 ### 服务端组件传递数据给客户端子组件需要注意什么？
 
 服务端组件通过props传递给客户端组件的数据，必须是可序列化的。具体可以参考[文档](https://react.dev/reference/rsc/use-client#serializable-types)。
+
+## 服务端函数问题
 
 ### 什么是服务端函数（server function）？
 
@@ -99,3 +101,36 @@ function EmptyNote() {
 }
 ```
 
+### 使用服务端函数更新了数据库后，怎么更新页面上的数据
+
+
+[参考文档](https://nextjs.org/docs/app/getting-started/updating-data#revalidating-the-cache)
+
+```typescript
+import { revalidatePath } from 'next/cache'
+ 
+export async function createPost(formData: FormData) {
+  'use server'
+  // Update data
+  // ...
+ 
+  revalidatePath('/posts')
+}
+```
+
+### 服务端函数怎么重定向
+
+[参考文档](https://nextjs.org/docs/app/getting-started/updating-data#redirecting)
+
+```typescript
+'use server'
+ 
+import { redirect } from 'next/navigation'
+ 
+export async function createPost(formData: FormData) {
+  // Update data
+  // ...
+ 
+  redirect('/posts')
+}
+```
