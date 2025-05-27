@@ -52,7 +52,11 @@ npm login
 npm login --auth-type=web
 ```
 
-## 4. 版本管理
+## 4. 构建产物
+
+发布包前，一般需要进行构建，一般产物会输出到 `dist` 或 `build` 目录。如果你的包不需要进行构建可以忽略掉这步骤。
+
+## 5. 版本管理
 
 发布包时，需要指定版本号。npm提供快捷的版本修改方式，可以使用`npm version`命令。
 
@@ -79,10 +83,12 @@ git commit -m 'update version'
 git tag -a 1.0.2 -m 'version 1.0.2'
 ```
 
-## 5. 发布
+## 6. 发布
 
 万事具备，可以发布了。
 
 ```shell
 npm publish
 ```
+
+如果有些文件不需要发布，可以使用`.npmignore`文件指定。它的配置和`.gitignore`文件一样。
