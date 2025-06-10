@@ -37,7 +37,7 @@ alter table report_exec_record
 
 ```sql
 use ireport;
-ALTER TABLE `report_generate_task_record` 
-    ADD COLUMN `column name` int(11) DEFAULT NULL,
-    ADD COLUMN `column name` int(11) DEFAULT NULL;
+alter table report_generate_task_record 
+    add column reportPic longtext DEFAULT NULL COMMENT '报告pic',
+    add column picCost bigint DEFAULT NULL COMMENT '图片生成耗时';
 ```
