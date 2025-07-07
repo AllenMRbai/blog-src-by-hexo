@@ -35,12 +35,9 @@ importers:
       hexo-server:
         specifier: ^3.0.0
         version: 3.0.0
-      hexo-theme-landscape:
-        specifier: ^1.0.0
-        version: 1.1.0
       hexo-theme-next:
-        specifier: ^8.23.0
-        version: 8.23.0
+        specifier: ^8.23.2
+        version: 8.23.2
 
 packages:
 
@@ -266,6 +263,15 @@ packages:
       supports-color:
         optional: true
 
+  debug@4.4.1:
+    resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   decimal.js@10.5.0:
     resolution: {integrity: sha512-8vDa8Qxvr/+d94hSh5P3IJwI5t8/c0KsMp+g8bNw9cY2icONa5aPfvKeieW1WlG0WQYwwhJ7mjui2xtiePQSXw==}
 
@@ -410,6 +416,7 @@ packages:
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
 
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
@@ -518,11 +525,8 @@ packages:
     resolution: {integrity: sha512-u4s0ty9Aew6jV+a9oMrXBwhrRpUQ0U8PWM/88a5aHgDru58VY81mVrxOFxs788NAsWQ8OvsJtF5m7mnXoRnSIA==}
     engines: {node: '>=12.13.0'}
 
-  hexo-theme-landscape@1.1.0:
-    resolution: {integrity: sha512-nszjixBEiEDZjf7glAGbHg0nKGHZdUDwzFVVdRDeu4FeHfGcY5CZNl9sF4vSligjnD8IwFXpDfx5E+GRmNKvWg==}
-
-  hexo-theme-next@8.23.0:
-    resolution: {integrity: sha512-hHRuGRCTF1HyIjvucK3Ylxr2qYB2/bFXdD/IWyPtxcVvkLgn3jcwBq4Zw/ksd0qtKNnLnjrlwWSH9Dyy9Li5mA==}
+  hexo-theme-next@8.23.2:
+    resolution: {integrity: sha512-PXkWE8BLpD3ON0Y15epb/Vxm2lwVqH9xwDTdYAI7nbbi0tJql6BtcR6WEK2/UOTmZ/IIMKUVMAzLPM+cbeU2VQ==}
 
   hexo-util@3.3.0:
     resolution: {integrity: sha512-YvGngXijE2muEh5L/VI4Fmjqb+/yAkmY+VuyhWVoRwQu1X7bmWodsfYRXX7CUYhi5LqsvH8FAe/yBW1+f6ZX4Q==}
@@ -763,6 +767,9 @@ packages:
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
 
   node-gyp-build@4.8.4:
     resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
@@ -908,8 +915,8 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
+  semver@7.7.2:
+    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -1159,7 +1166,7 @@ snapshots:
       nopt: 5.0.0
       npmlog: 5.0.1
       rimraf: 3.0.2
-      semver: 7.7.1
+      semver: 7.7.2
       tar: 6.2.1
     transitivePeerDependencies:
       - encoding
@@ -1178,7 +1185,7 @@ snapshots:
 
   agent-base@6.0.2:
     dependencies:
-      debug: 4.4.0
+      debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -1357,6 +1364,11 @@ snapshots:
   debug@4.4.0:
     dependencies:
       ms: 2.1.3
+
+  debug@4.4.1:
+    dependencies:
+      ms: 2.1.3
+    optional: true
 
   decimal.js@10.5.0: {}
 
@@ -1644,9 +1656,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  hexo-theme-landscape@1.1.0: {}
-
-  hexo-theme-next@8.23.0: {}
+  hexo-theme-next@8.23.2: {}
 
   hexo-util@3.3.0:
     dependencies:
@@ -1718,7 +1728,7 @@ snapshots:
   https-proxy-agent@5.0.1:
     dependencies:
       agent-base: 6.0.2
-      debug: 4.4.0
+      debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -1927,8 +1937,9 @@ snapshots:
 
   node-fetch@2.7.0(encoding@0.1.13):
     dependencies:
-      encoding: 0.1.13
       whatwg-url: 5.0.0
+    optionalDependencies:
+      encoding: 0.1.13
     optional: true
 
   node-gyp-build@4.8.4:
@@ -2053,7 +2064,7 @@ snapshots:
   semver@6.3.1:
     optional: true
 
-  semver@7.7.1:
+  semver@7.7.2:
     optional: true
 
   send@0.19.0:
